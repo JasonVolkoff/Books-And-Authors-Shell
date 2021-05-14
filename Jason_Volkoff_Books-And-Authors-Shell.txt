@@ -1,0 +1,65 @@
+from books_authors_app.models import *
+Book(title="C Sharp", desc="A book about C#")
+Book(title="Java", desc="A book about Java")
+Book(title="Python", desc="A book about Python")
+Book(title="PHP", desc="A book about PHP")
+Book(title="Ruby", desc="A book about Ruby")
+Author(first_name="Jane", last_name="Austen")
+Author(first_name="Emily", last_name="Dickinson")
+Author(first_name="Fyodor", last_name="Dostoevsky")
+Author(first_name="William", last_name="Shakespeare")
+Author(first_name="Lau", last_name="Tzu")
+
+exit()
+py manage.py makemigrations
+py manage.py migrate
+py manage.py shell
+from books_authors_app.models import *
+
+b1 = Book.objects.get(id=1)
+b1.title = "C#"
+b1.save()
+
+a4 = Author.objects.get(id=4)
+a4.first_name = "Bill"
+a4.save()
+
+a1 = Author.objects.get(id=1)
+a1.save()
+b1 = Book.objects.get(id=1)
+b1.save()
+b2 = Book.objects.get(id=2)
+b2.save()
+a1.books.add(b1)
+a1.books.add(b2)
+a1.save()
+
+a2 = Author.objects.get(id=2)
+a2.save()
+b3 = Book.objects.get(id=3)
+b3.save()
+a2.books.add(b1, b2, b3)
+a2.save()
+
+a3 = Author.objects.get(id=3)
+a3.save()
+b4 = Book.objects.get(id=4)
+b4.save()
+a3.books.add(b1, b2, b3, b4)
+a3.save()
+
+b5 = Book.objects.get(id=5)
+b5.save()
+a4.books.add(b1, b2, b3, b4, b5)
+a4.save()
+
+b3.authors.all()
+b3.authors.remove(a1)
+b3.save()
+
+b2.authors.add(a5)
+b2.save
+
+a3.books.all()
+
+b5.authors.all()
