@@ -41,6 +41,15 @@ def see_author(request, id):
 def see_book(request, id):
     context = {
         "book": Book.objects.get(id=id),
-        "authors": Author.objects.all()
+        "authors": Author.objects.exclude(books__id=id)
     }
     return render(request, 'see_book.html', context)
+
+
+def add_author_to_book(request, id):
+    if request.method == "POST":
+        book = Book.objects.get(id=id)
+        author = Author.objects.get(id=request.POST['authorSelect'])
+        book.authors.add(author)
+    return redirect(f'/books/{id}')
+    # worked here last
