@@ -13,13 +13,16 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container mt-5">
+        <nav class="navbar justify-content-center">
+            <a class="nav-link" href="/">Add Book</a>
+            <a class="nav-link" href="/authors">Add Author</a>
+        </nav>
         <h1>{{ book.title }}</h1>
         <div class="container">
             <div class="row">
                 <p>ID: {{ book.id }}</p>
             </div>
-
             <div class="row">
                 <div class="mr-2">
                     <p>Description: </p>
@@ -36,21 +39,16 @@
                 <li>{{ author.first_name }} {{ author.last_name }}</li>
                 {% endfor %}
             </ul>
-            {% comment %} work below {% endcomment %}
             <form action="/authors/{{ book.id }}/add_author_to_book" method="POST">
                 {% csrf_token %}
                 <select name="authorSelect" id="author_id">
                     <option selected>-select an author-</option>
                     {% for author in authors %}
-
                     <option value="{{ author.id }}">{{ author.first_name }} {{ author.last_name }}</option>
-
-
                     {% endfor %}
                 </select>
                 <button type="submit" class="btn btn-sm btn-primary ml-2">Submit</button>
             </form>
-
         </div>
     </div>
 </body>
